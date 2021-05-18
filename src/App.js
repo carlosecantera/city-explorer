@@ -1,25 +1,38 @@
-import logo from './logo.svg';
+import React from 'react';
+import axios from 'axios';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const API_KEY = process.env.REACT_APP_API_KEY
+
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      data: {},
+    }
+  }
+
+  fetchData = () => {
+    axios.get('https://us1.locationiq.com/v1/search.php')
+    .then(response => console.log(response))
+    .catch(error => console.error(error));
+  }
+
+  fetchDataCityExplorer = CityExplorer () => {
+    let response = await axios.get('https://us1.locationiq.com/v1/search.php');
+    console.log(response);
+  }
+
+
+  render(); {
+    return (
+      <div className="App">
+        <button onClick={this.fetchData}>Get Data</button>
+      </div>
+    );
+  }
 }
+
+
 
 export default App;
